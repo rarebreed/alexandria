@@ -1,8 +1,8 @@
 package com.github.redhatqe.db;
 
-import com.github.redhatqe.db.polarion.ProjectNode;
-import com.github.redhatqe.db.polarion.TestCaseNode;
-import com.github.redhatqe.db.polarion.MethodNode;
+import com.github.redhatqe.db.nodes.testcase.ProjectNode;
+import com.github.redhatqe.db.nodes.testcase.TestCaseNode;
+import com.github.redhatqe.db.nodes.testcase.MethodNode;
 import com.orientechnologies.orient.core.db.ODatabasePool;
 import com.orientechnologies.orient.core.db.ODatabaseType;
 import com.orientechnologies.orient.core.db.OrientDB;

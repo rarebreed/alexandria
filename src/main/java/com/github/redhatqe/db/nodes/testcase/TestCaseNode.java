@@ -1,8 +1,8 @@
-package com.github.redhatqe.db.polarion;
+package com.github.redhatqe.db.nodes.testcase;
 
 import com.github.redhatqe.db.CreateType;
 import com.github.redhatqe.db.MakeEdges;
-import com.github.redhatqe.db.TestCaseDefinitions;
+import com.github.redhatqe.db.nodes.NodeType;
 import com.github.redhatqe.db.utils.Tuple;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocument;
 import com.orientechnologies.orient.core.metadata.schema.OClass;
@@ -30,7 +30,6 @@ public class TestCaseNode {
         return (ODatabaseDocument odb) -> {
             OClass tc = NodeType.getClass(TestCaseNode.name, odb);
             List<Tuple<String, OType>> props = new ArrayList<>();
-            props.add(new Tuple<>("id", OType.INTEGER));
             props.add(new Tuple<>("id", OType.INTEGER));
             props.add(new Tuple<>("title", OType.STRING));
             props.add(new Tuple<>("description", OType.STRING));

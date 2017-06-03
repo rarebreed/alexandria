@@ -1,4 +1,4 @@
-package com.github.redhatqe.db.polarion;
+package com.github.redhatqe.db.nodes.testcase;
 
 /**
  * Represents a type of a test (Eg Functional or non-functional)

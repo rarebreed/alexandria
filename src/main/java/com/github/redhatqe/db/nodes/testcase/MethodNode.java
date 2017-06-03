@@ -1,6 +1,7 @@
-package com.github.redhatqe.db.polarion;
+package com.github.redhatqe.db.nodes.testcase;
 
 import com.github.redhatqe.db.CreateType;
+import com.github.redhatqe.db.nodes.NodeType;
 import com.github.redhatqe.db.utils.Tuple;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocument;
 import com.orientechnologies.orient.core.metadata.schema.OClass;
@@ -28,6 +29,20 @@ public class MethodNode {
             props.add(new Tuple<>("class", OType.STRING));
             props.add(new Tuple<>("methodName", OType.STRING));
 
+            props.forEach(t -> {
+                if(!vtx.existsProperty(t.first))
+                    vtx.createProperty(t.first, t.second);
+                else
+                    logger.info("{} property already exists", t.first);
+            });
+
+            return vtx;
+        };
+    }
+
+    public static CreateType node(List<Tuple<String, OType>> props) {
+        return (ODatabaseDocument odb) -> {
+            OClass vtx = NodeType.getClass(name, odb);
             props.forEach(t -> {
                 if(!vtx.existsProperty(t.first))
                     vtx.createProperty(t.first, t.second);

@@ -1,6 +1,7 @@
-package com.github.redhatqe.db.polarion;
+package com.github.redhatqe.db.nodes.testcase;
 
 import com.github.redhatqe.db.CreateType;
+import com.github.redhatqe.db.nodes.NodeType;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocument;
 import com.orientechnologies.orient.core.metadata.schema.OClass;
 import com.orientechnologies.orient.core.metadata.schema.OType;
