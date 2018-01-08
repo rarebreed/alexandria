@@ -1,8 +1,9 @@
-package com.github.redhatqe.db;
+package com.github.redhatqe.alexandria;
 
-import com.github.redhatqe.db.nodes.testcase.ProjectNode;
-import com.github.redhatqe.db.nodes.testcase.TestCaseNode;
-import com.github.redhatqe.db.nodes.testcase.MethodNode;
+import com.github.redhatqe.alexandria.nodes.CreateType;
+import com.github.redhatqe.alexandria.schema.db.testcase.ProjectNode;
+import com.github.redhatqe.alexandria.schema.db.testcase.TestCaseNode;
+import com.github.redhatqe.alexandria.schema.db.testcase.MethodNode;
 import com.orientechnologies.orient.core.db.ODatabasePool;
 import com.orientechnologies.orient.core.db.ODatabaseType;
 import com.orientechnologies.orient.core.db.OrientDB;
@@ -19,13 +20,13 @@ public class TestCaseDefinitions {
     private OrientDB odb;
     public static final String name = "TestCaseType";
     public static Logger logger = LogManager.getLogger(name);
-    public String dbName = "testcaseDefinitions";
-    public String dburl; // path to db like "remote:192.168.1.1"
-    public String user;
-    public String password;
+    public static final String dbName = "testcaseDefinitions";
+    private String dburl; // path to alexandria like "remote:192.168.1.1"
+    private String user;
+    private String password;
 
     public static String makeServerUrl(TestCaseDefinitions db) {
-        return String.format("%s/%s", db.dburl, db.dbName);
+        return String.format("%s/%s", db.dburl, TestCaseDefinitions.dbName);
     }
 
     public TestCaseDefinitions(String url,  String user, String pw) {
@@ -63,7 +64,7 @@ public class TestCaseDefinitions {
      * @return
      */
     public void createGraphTypes(List<CreateType> cts){
-        ODatabasePool pool = new ODatabasePool(this.odb, this.dbName,"root","redHAT2017");
+        ODatabasePool pool = new ODatabasePool(this.odb, TestCaseDefinitions.dbName, this.user, this.password);
         try (ODatabaseDocument db = pool.acquire()) {
             cts.forEach(ct -> ct.create(db));
         }
@@ -74,8 +75,8 @@ public class TestCaseDefinitions {
     }
 
     public static void main(String[] args) {
-        TestCaseDefinitions tcdb = new TestCaseDefinitions("remote:192.168.1.107", "root", "redHAT2017");
-        tcdb.createDB(tcdb.dbName);
+        TestCaseDefinitions tcdb = new TestCaseDefinitions("remote:127.0.0.1", "root", "redH@T2018");
+        tcdb.createDB(TestCaseDefinitions.dbName);
 
         List<CreateType> vtxFns = tcdb.makeAllVertices();
         tcdb.createGraphTypes(vtxFns);

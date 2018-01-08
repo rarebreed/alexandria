@@ -1,9 +1,9 @@
-package com.github.redhatqe.db.nodes.testcase;
+package com.github.redhatqe.alexandria.schema.db.testcase;
 
-import com.github.redhatqe.db.CreateType;
-import com.github.redhatqe.db.MakeEdges;
-import com.github.redhatqe.db.nodes.NodeType;
-import com.github.redhatqe.db.utils.Tuple;
+import com.github.redhatqe.alexandria.nodes.CreateType;
+import com.github.redhatqe.alexandria.nodes.MakeEdges;
+import com.github.redhatqe.alexandria.nodes.NodeType;
+import com.github.redhatqe.alexandria.utils.Tuple;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocument;
 import com.orientechnologies.orient.core.metadata.schema.OClass;
 import com.orientechnologies.orient.core.metadata.schema.OType;
@@ -22,8 +22,10 @@ import java.util.Map;
 public class TestCaseNode {
     public static final String name = TestCaseNode.class.getSimpleName();
     public static Logger logger = LogManager.getLogger(name);
+    // Preset edge types
     public static final String projectEdge = "is in";   // A TestCaseNode "is in" a ProjectNode
     public static final String setupEdge = "setup by";  // A TestCaseNode is "setup by" a SetupNode
+    public static final String methodEdge = "implemented by"; // The method that executes this testcase
 
     // Creates the type for a TestCase.  This is the starting point, or root of our graph
     public static CreateType node() {
@@ -54,10 +56,12 @@ public class TestCaseNode {
         OClass vtx = odb.getClass(TestCaseNode.name);
         OClass project = odb.getClass(ProjectNode.name);
         OClass setup = odb.getClass(SetupNode.name);
+        OClass method = odb.getClass(MethodNode.name);
 
         Map<String, Tuple<OType, OClass>> links = new HashMap<>();
         links.put(projectEdge, new Tuple<>(OType.LINKSET, project));  // can belong to more than one project
         links.put(setupEdge, new Tuple<>(OType.LINK, setup));
+        links.put(methodEdge, new Tuple<>(OType.LINK, method));
 
         return new Tuple<>(vtx, links);
     }

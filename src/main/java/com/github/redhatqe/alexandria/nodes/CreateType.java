@@ -1,4 +1,4 @@
-package com.github.redhatqe.db;
+package com.github.redhatqe.alexandria.nodes;
 
 import com.orientechnologies.orient.core.db.document.ODatabaseDocument;
 import com.orientechnologies.orient.core.metadata.schema.OClass;

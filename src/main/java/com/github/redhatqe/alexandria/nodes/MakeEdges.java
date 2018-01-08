@@ -1,6 +1,6 @@
-package com.github.redhatqe.db;
+package com.github.redhatqe.alexandria.nodes;
 
-import com.github.redhatqe.db.utils.Tuple;
+import com.github.redhatqe.alexandria.utils.Tuple;
 import com.orientechnologies.orient.core.metadata.schema.OClass;
 import com.orientechnologies.orient.core.metadata.schema.OType;
 

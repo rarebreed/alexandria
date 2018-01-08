@@ -1,9 +1,9 @@
-package com.github.redhatqe.db.nodes.testresult;
+package com.github.redhatqe.alexandria.schema.db.testresult;
 
-import com.github.redhatqe.db.CreateType;
-import com.github.redhatqe.db.nodes.NodeType;
-import com.github.redhatqe.db.nodes.testcase.TestCaseNode;
-import com.github.redhatqe.db.utils.Tuple;
+import com.github.redhatqe.alexandria.nodes.CreateType;
+import com.github.redhatqe.alexandria.nodes.NodeType;
+import com.github.redhatqe.alexandria.schema.db.testcase.TestCaseNode;
+import com.github.redhatqe.alexandria.utils.Tuple;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocument;
 import com.orientechnologies.orient.core.metadata.schema.OClass;
 import com.orientechnologies.orient.core.metadata.schema.OType;
@@ -14,15 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents the result of a test
+ * Represents the result of a Suite of tests
  */
-public class ResultNode {
-    public static Logger logger = LogManager.getLogger(ResultNode.class.getSimpleName());
+public class SuiteResultNode {
+    public static final String name = TestCaseNode.class.getSimpleName();
+    public static Logger logger = LogManager.getLogger(name);
 
     // Creates the type for a TestCase.  This is the starting point, or root of our graph
     public static CreateType node() {
         return (ODatabaseDocument odb) -> {
-            OClass tc = NodeType.getClass(TestCaseNode.name, odb);
+            OClass sr = NodeType.getClass(SuiteResultNode.name, odb);
             List<Tuple<String, OType>> props = new ArrayList<>();
             props.add(new Tuple<>("id", OType.INTEGER));
             props.add(new Tuple<>("passes", OType.INTEGER));
@@ -32,13 +33,13 @@ public class ResultNode {
             props.add(new Tuple<>("total", OType.INTEGER));
 
             for(Tuple<String, OType> t: props) {
-                if(!tc.existsProperty(t.first))
-                    tc.createProperty(t.first, t.second);
+                if(!sr.existsProperty(t.first))
+                    sr.createProperty(t.first, t.second);
                 else
                     logger.info("{} property already exists", t.first);
             }
 
-            return tc;
+            return sr;
         };
     }
 }

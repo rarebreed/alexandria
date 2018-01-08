@@ -1,7 +1,7 @@
-package com.github.redhatqe.db.nodes.testcase;
+package com.github.redhatqe.alexandria.schema.db.testcase;
 
-import com.github.redhatqe.db.CreateType;
-import com.github.redhatqe.db.nodes.NodeType;
+import com.github.redhatqe.alexandria.nodes.CreateType;
+import com.github.redhatqe.alexandria.nodes.NodeType;
 import com.orientechnologies.orient.core.db.document.ODatabaseDocument;
 import com.orientechnologies.orient.core.metadata.schema.OClass;
 import com.orientechnologies.orient.core.metadata.schema.OType;

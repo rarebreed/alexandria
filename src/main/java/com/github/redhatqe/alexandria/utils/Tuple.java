@@ -1,4 +1,4 @@
-package com.github.redhatqe.db.utils;
+package com.github.redhatqe.alexandria.utils;
 
 /**
  * Created by stoner on 5/16/17.
